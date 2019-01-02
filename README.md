@@ -2,7 +2,9 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
+
 CSDN博客地址：https://blog.csdn.net/sinat_26917383/article/details/85614247
+
 
 # 1 数据准备
 最简单是因为把数据整理成以下的样子就可以开始训练：
@@ -106,6 +108,10 @@ r_image.show()
 ```
 直接返回的是带框的图片，如果你要输出boxes，可以自己改一下`detect_image`函数。
 
+----------
+##########################################################
+##############          原项目内容           ##############
+##########################################################
 
 ## Introduction
 
