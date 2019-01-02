@@ -113,12 +113,63 @@ r_image.show()
 
 此时注意以下：out_boxes, out_scores, out_classes中out_boxes，每个Boxes代表的是：y_min, x_min, y_max, x_max
 
+在此之上，进行预测结果优化，可参考：`yolo_matt.py`:
+
+```
+import sys
+import argparse
+from yolo_matt import YOLO, detect_video
+from PIL import Image
+
+yolo_test_args = {
+    "model_path": 'logs/003/ep077-loss19.318-val_loss19.682.h5',
+    "anchors_path": 'model_data/yolo_anchors.txt',
+    "classes_path": 'model_data/class_file_en.txt',
+    "score" : 0.2,# 0.2
+    "iou" : 0.1,# 0.45
+    "model_image_size" : (416, 416),
+    "gpu_num" : 1,
+}
+
+yolo_test = YOLO(**yolo_test_args)
+
+# 输出内容整理
+def yolov3_output(image,out_boxes,out_scores,out_classes):
+    output = []
+    for n,box in enumerate(out_boxes):
+        y_min, x_min, y_max, x_max = box
+        y_min = max(0, np.floor(y_min + 0.5).astype('int32'))
+        x_min = max(0, np.floor(x_min + 0.5).astype('int32'))
+        y_max = min(image.size[1], np.floor(y_max + 0.5).astype('int32'))
+        x_max = min(image.size[0], np.floor(x_max + 0.5).astype('int32'))
+        score = out_scores[n]
+        yo_class = yolo_classes[out_classes[n]]
+        output.append({ 'y_min':y_min, 'x_min':x_min, 'y_max':y_max, 'x_max':x_max,\
+                       'width':image.size[0],'height':image.size[1],\
+                       'score':score,'yo_class':yo_class})
+    return output
+
+    image = Image.open('images/images_all/path1.jpg')
+    r_image,out_boxes, out_scores, out_classes = yolo_test.detect_image(image)
+    output = yolov3_output(r_image,out_boxes,out_scores,out_classes)
+```
+
+输出结果类似：
+
+```
+{
+'path1.jpg': 
+[{'y_min': 416,   'x_min': 34,   'y_max': 754,   'x_max': 367,   'width': 440,   'height': 783,   'score': 0.9224778,   'yo_class': 'class1'},
+  {'y_min': 428,   'x_min': 3,   'y_max': 783,   'x_max': 352,   'width': 440,   'height': 783,   'score': 0.2180994,   'yo_class': 'class2'}]
+  }
+```
+
+
+
 ----------
 
 
-##########################################################
-##############          原项目内容           ##############
-##########################################################
+##########    原项目内容       20190102 #############
 
 ## Introduction
 
