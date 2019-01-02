@@ -111,6 +111,7 @@ r_image.show()
 ```
 直接返回的是带框的图片，如果你要输出boxes，可以自己改一下`detect_image`函数。
 
+此时注意以下：out_boxes, out_scores, out_classes中out_boxes，每个Boxes代表的是：y_min, x_min, y_max, x_max
 
 ----------
 
