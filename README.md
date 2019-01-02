@@ -4,6 +4,9 @@
 
 
 CSDN博客地址：https://blog.csdn.net/sinat_26917383/article/details/85614247
+其中，
+- selfdata_keras_yolov3.ipynb，自己训练时候的ipynb
+- selfdata_yolov3_test.ipynb，自己预测时候的ipynb
 
 
 # 1 数据准备
