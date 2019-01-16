@@ -138,8 +138,16 @@ yolo_test_args = {
 yolo_test = YOLO(**yolo_test_args)
 
 # 输出内容整理
+def _get_class(classes_path):
+    classes_path = os.path.expanduser(classes_path)
+    with open(classes_path) as f:
+        class_names = f.readlines()
+    class_names = [c.strip() for c in class_names]
+    return class_names
+
 def yolov3_output(image,out_boxes,out_scores,out_classes):
     output = []
+    yolo_classes = _get_class(yolo_test_args['classes_path'])
     for n,box in enumerate(out_boxes):
         y_min, x_min, y_max, x_max = box
         y_min = max(0, np.floor(y_min + 0.5).astype('int32'))
