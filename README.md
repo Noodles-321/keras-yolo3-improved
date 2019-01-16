@@ -153,9 +153,9 @@ def yolov3_output(image,out_boxes,out_scores,out_classes):
                        'score':score,'yo_class':yo_class})
     return output
 
-    image = Image.open('images/images_all/path1.jpg')
-    r_image,out_boxes, out_scores, out_classes = yolo_test.detect_image(image)
-    output = yolov3_output(r_image,out_boxes,out_scores,out_classes)
+image = Image.open('images/images_all/path1.jpg')
+r_image,out_boxes, out_scores, out_classes = yolo_test.detect_image(image)
+output = yolov3_output(r_image,out_boxes,out_scores,out_classes)
 ```
 
 输出结果类似：
